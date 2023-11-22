@@ -1,0 +1,17 @@
+﻿global using System.ComponentModel.DataAnnotations;
+global using System.Text.Json.Serialization;
+global using System.Security.Cryptography;
+global using System.Text;
+global using static BCrypt.Net.BCrypt;
+global using pkg_context.Validations;
+global using pkg_context.Cryptography;
+global using pkg_context.Entities;
+global using pkg_context.Repositories.Interfaces;
+global using Microsoft.EntityFrameworkCore;
+global using pkg_context.Context;
+global using pkg_context.Repositories.Repository;
+global using Microsoft.Extensions.DependencyInjection;
+global using pkg_context.Repositories.Cached;
+global using Microsoft.AspNetCore.Http;
+global using pkg_context.Factories;
+global using application_pkg.Interfaces;
