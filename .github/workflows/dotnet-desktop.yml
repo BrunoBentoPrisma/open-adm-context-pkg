@@ -25,7 +25,7 @@ jobs:
         run: dotnet test
       - name: Calculate version
         id: calculate_version
-        run: echo "VERSION=${{ github.event.commits.length }}" >> $GITHUB_ENV
+        run: echo "VERSION=${{ github.event_size }}" >> $GITHUB_ENV
       - name: Create pkg
         run: dotnet pack -p:PackageVersion=1.0.${{ env.VERSION }}
         working-directory: ./pkg-context
