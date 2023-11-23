@@ -5,6 +5,10 @@
     <RootNamespace>pkg_context</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Version>1.0.0.1</Version>
+    <Authors>Bruno Bento Gonçalves</Authors>
+    <Company>Open Adm</Company>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
