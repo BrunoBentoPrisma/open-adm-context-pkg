@@ -20,6 +20,16 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
       - name: Build
-        run: dotnet build
+        run: dotnet build --configuration Release
       - name: Test with the dotnet CLI
         run: dotnet test
+      - name: Create pkg
+        run: dotnet pack -p:PackageVersion=1.0.0.2
+        working-directory: ./pkg-context
+      - name: Archive Nuget
+        uses: actions/upload-artifact@v3
+        with:
+          name: pkg
+          path: "**/*.nupkg"
+      - name: Publish Nuget
+        run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
