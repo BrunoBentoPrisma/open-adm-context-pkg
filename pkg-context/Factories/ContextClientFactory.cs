@@ -1,6 +1,6 @@
 ﻿namespace pkg_context.Factories;
 
-public static class ContextFactory
+public static class ContextClientFactory
 {
     public static ClientContext CreateContextClient(byte[] stringConnectionByte)
     {

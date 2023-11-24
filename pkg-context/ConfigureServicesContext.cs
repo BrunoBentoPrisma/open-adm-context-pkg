@@ -1,11 +1,16 @@
-﻿namespace pkg_context;
+﻿using pkg_context.Factories.Factories;
+using pkg_context.Factories.Interfaces;
+
+namespace pkg_context;
 
 public static class ConfigureServicesContext
 {
     public static IServiceCollection Inject(IServiceCollection services)
     {
         services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
-        services.AddScoped<IFactory, Factory>();
+        services.AddScoped<IFactoryContext, Factory>();
+        services.AddScoped<FactoryByClientKey>();
+        services.AddScoped<FactoryByPath>();
         services.AddScoped<PartnerRepository>();
         services.AddScoped<IPartnerRepository, CachedPartner>();
 

@@ -4,6 +4,7 @@ public abstract class BaseEntity
 {
     protected BaseEntity(int number)
     {
+        if (number <= 0) throw new ArgumentException("Número de entidade inválido!");
         Number = number;
         Created_at = DateTime.Now;
         Update_at = DateTime.Now;

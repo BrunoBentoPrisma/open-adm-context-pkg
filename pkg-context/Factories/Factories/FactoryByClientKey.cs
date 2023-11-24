@@ -1,32 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore.Internal;
+﻿using pkg_context.Factories.Interfaces;
 
-namespace pkg_context.Factories;
+namespace pkg_context.Factories.Factories;
 
-public class Factory : IFactory
+public class FactoryByClientKey : IFactoryBy
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IPartnerRepository _partnerRepository;
 
-    public Factory(
+    public FactoryByClientKey(
         IHttpContextAccessor httpContextAccessor,
         IPartnerRepository partnerRepository)
     {
         _httpContextAccessor = httpContextAccessor;
         _partnerRepository = partnerRepository;
     }
-
-    public async Task<ClientContext> CreateDatabaseByPathAsync()
-    {
-        var url = _httpContextAccessor?.HttpContext?.Request.Headers["Referer"].ToString()
-            ?? throw new Exception("Erro ao recuperar path base da requisição, para criar o context do cliente!");
-
-        var partner = await _partnerRepository.GetPartnerByUrlAsync(url)
-            ?? throw new Exception($"Erro ao localizar a empresa com a URL : {url}, para criar o context do cliente!");
-
-        return ContextFactory.CreateContextClient(partner.Db);
-    }
-
-    public async Task<ClientContext> CreateDatabaseByClientKeyAsync()
+    public async Task<ClientContext> CreateDatabase()
     {
         var key = _httpContextAccessor?.HttpContext?.Request.Headers["clientKey"].ToString()
             ?? throw new Exception("Erro ao recuperar clientKey da requisição,para criar o context do cliente!");
@@ -36,6 +24,6 @@ public class Factory : IFactory
         var partner = await _partnerRepository.GetPartnerByClientKeyAsync(clientKey)
             ?? throw new Exception($"Erro ao lozalizar a empresa com clientKey : {clientKey}, para criar context do cliente!");
 
-        return ContextFactory.CreateContextClient(partner.Db);
+        return ContextClientFactory.CreateContextClient(partner.Db);
     }
 }
